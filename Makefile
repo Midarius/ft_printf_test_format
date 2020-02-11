@@ -22,7 +22,9 @@ $(NAME): $(SRC)
 	$(CC) -o $@ $^ $(CFLAGS) $(DEF) -L$(FT_PRINTF) -lftprintf
 	./$(NAME)
 
-.PHONY = fclean
+.PHONY = fclean re
 
 fclean:
 	rm $(NAME)
+
+re: fclean all
