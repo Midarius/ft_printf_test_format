@@ -10,7 +10,7 @@ DEF =
 
 CC = gcc
 
-CFLAGS = -Wall -Wextras
+CFLAGS = -Wall -Wextra
 
 NAME = ft_printf_test_format
 
@@ -25,6 +25,6 @@ $(NAME): $(SRC)
 .PHONY = fclean re
 
 fclean:
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
