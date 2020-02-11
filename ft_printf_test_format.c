@@ -2,11 +2,22 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define OK_RTN ft_printf("ft_printf:\t%d\n", rtn_ft)
+
 #ifndef FANCY
 #define TESTLINE ft_printf("\x1b[35m/---\x1b[0m \x1b[96m%03u\x1b[0m \x1b[35m---/\x1b[0m\n", __LINE__)
+#define ERR_RTN ft_printf("ft_printf:\t\x1b[41m\x1b[30m%d\x1b[0m\n", rtn_ft)
 #else
 #define TESTLINE ft_printf("/--- %03u ---/\n", __LINE__)
+#define ERR_RTN OK_RTN
 #endif
+
+#define CHECKRTN do {\
+	if (rtn_ft != rtn_lc)\
+		ERR_RTN;\
+	else\
+		OK_RTN;\
+} while(0)
 
 #ifndef EDGE
 #define PRINTF_E(format, ...) PRINTF_M(format, __VA_ARGS__)
@@ -19,17 +30,19 @@
 
 #define PRINTF_M(format, ...) do {\
 	TESTLINE;\
-	rtn = printf(format, __VA_ARGS__);\
-	printf("   printf:\t%d\n", rtn);\
-	rtn = ft_printf(format, __VA_ARGS__);\
-	ft_printf("ft_printf:\t%d\n", rtn);\
+	rtn_lc = printf(format, __VA_ARGS__);\
+	printf("   printf:\t%d\n", rtn_lc);\
+	rtn_ft = ft_printf(format, __VA_ARGS__);\
+	CHECKRTN;\
 } while(0)
 
 int	ft_printf(const char *format, ...);
 
 int	main(void)
 {
-	int rtn;
+	int rtn_lc;
+	int rtn_ft;
+
 	int a = 0;
 	int *p_a = &a;
 
